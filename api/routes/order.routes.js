@@ -1,25 +1,16 @@
 const express = require("express");
 const app = express.Router();
+const controllers = require("../controllers");
 
-app.get("/", (req, res) => {
-    
-    res.status(200).send(orders);
-});
+app.get("/", controllers.orderControllers.getAllOrders);
 
-app.post("/", (req, res) => {
-    const orders = [{orderId: "1"}, {orderId: "2"}];
-    res.status(200).send(orders);
-});
+app.post("/", controllers.orderControllers.addOrder);
 
-app.patch("/:id", (req, res) => {
-    const orders = [{orderId: "1"}, {orderId: "2"}];
-    res.status(200).send(orders);
-});
+app.get("/:orderId", controllers.orderControllers.getOrder);
 
-app.delete("/:id", (req, res) => {
-    const orders = [{orderId: "1"}, {orderId: "2"}];
-    res.status(200).send(orders);
-});
+app.patch("/:orderId", controllers.orderControllers.updateOrder);
+
+app.delete("/:orderId", controllers.orderControllers.cancelOrder);
 
 
 module.exports = app;
