@@ -1,4 +1,4 @@
-const { serverStart } = require("./app");
+const { serverStart, declareGlobal } = require("./app");
 
 serverStart();
 declareGlobal();
