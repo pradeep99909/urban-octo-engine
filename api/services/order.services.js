@@ -14,7 +14,7 @@ const getOrder = (userId, orderId) => {
 }
 
 const addOrder = (userId, order) => {
-    const orderId = order.id
+    const orderId = Date.now();
     order.state = CONSTANTS.ENUM.ORDER_STATES.CONFIRMED;
     console.log("!global.orders[userId] ::", !global.orders[userId])
     if (!global.orders[userId]) {
