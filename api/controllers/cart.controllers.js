@@ -18,7 +18,7 @@ const getUserCart = (req, res) => {
 const addToUserCart = (req, res) => {
   try {
     const userId = req.userId;
-    const cartData = req.body.cart;
+    const cartData = req.body;
     const data = services.cartServices.addToUserCart(userId, cartData);
     return response.resourceCreated(res, data);
   } catch (error) {
@@ -34,7 +34,7 @@ const updateUserCart = (req, res) => {
   try {
     const userId = req.userId;
     const cartId = req.params.cartId;
-    const cartData = req.body.cartData;
+    const cartData = req.body;
     const data = services.cartServices.updateUserCart(userId, cartId, cartData);
     return response.successResponse(res, data);
   } catch (error) {
@@ -49,7 +49,7 @@ const updateUserCart = (req, res) => {
 const deleteUserCart = (req, res) => {
   try {
     const userId = req.userId;
-    const data = services.cartServices.getUserCart(userId);
+    const data = services.cartServices.deleteUserCart(userId);
     return response.successResponse(res, data);
   } catch (error) {
     console.error(
@@ -63,6 +63,7 @@ const deleteUserCart = (req, res) => {
 const deleteItemCart = (req, res) => {
   try {
     const userId = req.userId;
+    console.log("🚀 ~ deleteItemCart ~ userId:", userId);
     const cartId = req.params.cartId;
     const data = services.cartServices.deleteItemCart(userId, cartId);
     return response.successResponse(res, data);
