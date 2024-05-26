@@ -10,4 +10,4 @@ app.patch("/:cartId", controllers.cartControllers.updateUserCart);
 
 app.delete("/", controllers.cartControllers.deleteUserCart);
 
-app.delete("/cartId", controllers.cartControllers.deleteItemCart);
+app.delete("/:cartId", controllers.cartControllers.deleteItemCart);
