@@ -1,4 +1,4 @@
-import { useContext, useEffect, useMemo, useState, useCallback } from "react";
+import { useContext } from "react";
 import AppContext from "../context/app.context";
 import {
   Dialog,
@@ -10,24 +10,19 @@ import {
 
 import Network from "../network";
 
-const products = [
-  {
-    id: 2,
-    name: "Medium Stuff Satchel",
-    href: "#",
-    color: "Blue",
-    price: "$32.00",
-    quantity: 1,
-    imageSrc:
-      "https://tailwindui.com/img/ecommerce-images/shopping-cart-page-04-product-02.jpg",
-    imageAlt:
-      "Front of satchel with blue canvas body, black straps and handle, drawstring top, and front zipper pouch.",
-  },
-  // More products...
-];
+async function removeItemFromCart(setCarts, setCartOpen, cartId) {
+  const cartApi = new Network.cartNetwork.default("pradeep");
+  await cartApi.removeItemFromCart(cartId);
+  const userCarts = await cartApi.getUserCart();
+  console.log("🚀 ~ removeItemFromCart ~ userCarts:", userCarts);
+  if (!userCarts || userCarts.length == 0) {
+    setCartOpen(false);
+  }
+  setCarts(userCarts);
+}
 
 export default function Cart() {
-  const { isCartOpen, setCartOpen, carts } = useContext(AppContext);
+  const { isCartOpen, setCartOpen, carts, setCarts } = useContext(AppContext);
 
   return (
     <Transition show={isCartOpen}>
@@ -114,6 +109,13 @@ export default function Cart() {
 
                                         <div className="flex">
                                           <button
+                                            onClick={() => {
+                                              removeItemFromCart(
+                                                setCarts,
+                                                setCartOpen,
+                                                product.id
+                                              );
+                                            }}
                                             type="button"
                                             className="font-medium text-indigo-600 hover:text-indigo-500"
                                           >
