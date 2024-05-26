@@ -1,4 +1,4 @@
 module.exports = {
-    orderServices: require("./order.services"),
-    cartServices: require("./cart.services")
-}
+  orderServices: require("./order.services"),
+  cartServices: require("./cart.services"),
+};
