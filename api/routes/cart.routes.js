@@ -1,13 +1,36 @@
 const express = require("express");
 const app = express.Router();
 const controllers = require("../controllers");
+const middleware = require("../middleware");
 
-app.get("/", controllers.cartControllers.getUserCart);
+app.get(
+  "/",
+  middleware.userMiddleware.userValidation,
+  controllers.cartControllers.getUserCart
+);
 
-app.post("/", controllers.cartControllers.addToUserCart);
+app.post(
+  "/",
+  middleware.userMiddleware.userValidation,
+  controllers.cartControllers.addToUserCart
+);
 
-app.patch("/:cartId", controllers.cartControllers.updateUserCart);
+app.patch(
+  "/:cartId",
+  middleware.userMiddleware.userValidation,
+  controllers.cartControllers.updateUserCart
+);
 
-app.delete("/", controllers.cartControllers.deleteUserCart);
+app.delete(
+  "/",
+  middleware.userMiddleware.userValidation,
+  controllers.cartControllers.deleteUserCart
+);
 
-app.delete("/:cartId", controllers.cartControllers.deleteItemCart);
+app.delete(
+  "/:cartId",
+  middleware.userMiddleware.userValidation,
+  controllers.cartControllers.deleteItemCart
+);
+
+module.exports = app;
