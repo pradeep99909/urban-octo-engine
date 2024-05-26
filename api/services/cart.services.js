@@ -8,6 +8,7 @@ const getUserCart = (userId) => {
 };
 
 const addToUserCart = (userId, cartData) => {
+  console.log("🚀 ~ addToUserCart ~ userId, cartData:", userId, cartData);
   cartData.id = Date.now();
   if (!global.carts[userId]) {
     global.carts[userId] = [];
@@ -44,6 +45,7 @@ const deleteUserCart = (userId) => {
 };
 
 const deleteItemCart = (userId, cartId) => {
+  console.log("🚀 ~ deleteItemCart ~ userId, cartId:", userId, cartId);
   const cartIndex = global.carts[userId].findIndex((cart) => cart.id == cartId);
   if (cartIndex < 0) {
     const error = new Error();
