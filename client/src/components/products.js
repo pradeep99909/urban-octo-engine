@@ -1,8 +1,9 @@
 import React, { useContext } from "react";
 import AppContext from "../context/app.context";
+import Network from "../network";
 
 function Product() {
-  const { setCartOpen } = useContext(AppContext);
+  const { setCartOpen, setCarts } = useContext(AppContext);
   return (
     <a href="#" class="group">
       <div class="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-lg bg-gray-200 xl:aspect-h-8 xl:aspect-w-7">
@@ -15,7 +16,23 @@ function Product() {
       <h3 class="mt-4 text-sm text-gray-700">Earthen Bottle</h3>
       <p class="mt-1 text-lg font-medium text-gray-900">$48</p>
       <button
-        onClick={() => {
+        onClick={async () => {
+          const api = new Network.cartNetwork.default("pradeep");
+          const cart = {
+            id: 1,
+            name: "Throwback Hip Bag",
+            href: "#",
+            color: "Salmon",
+            price: "$90.00",
+            quantity: 1,
+            imageSrc:
+              "https://tailwindui.com/img/ecommerce-images/shopping-cart-page-04-product-01.jpg",
+            imageAlt:
+              "Salmon orange fabric pouch with match zipper, gray zipper pull, and adjustable hip belt.",
+          };
+          await api.addNewCart(cart);
+          const usersCart = await api.getUserCart();
+          setCarts(usersCart);
           setCartOpen(true);
         }}
         type="button"

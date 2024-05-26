@@ -1,4 +1,4 @@
-import { Fragment, useState, useContext } from "react";
+import { useContext, useEffect, useMemo, useState, useCallback } from "react";
 import AppContext from "../context/app.context";
 import {
   Dialog,
@@ -8,19 +8,9 @@ import {
   TransitionChild,
 } from "@headlessui/react";
 
+import Network from "../network";
+
 const products = [
-  {
-    id: 1,
-    name: "Throwback Hip Bag",
-    href: "#",
-    color: "Salmon",
-    price: "$90.00",
-    quantity: 1,
-    imageSrc:
-      "https://tailwindui.com/img/ecommerce-images/shopping-cart-page-04-product-01.jpg",
-    imageAlt:
-      "Salmon orange fabric pouch with match zipper, gray zipper pull, and adjustable hip belt.",
-  },
   {
     id: 2,
     name: "Medium Stuff Satchel",
@@ -37,8 +27,8 @@ const products = [
 ];
 
 export default function Cart() {
-  const { isCartOpen, setCartOpen } = useContext(AppContext);
-  const [open, setOpen] = useState(true);
+  const { isCartOpen, setCartOpen, carts } = useContext(AppContext);
+
   return (
     <Transition show={isCartOpen}>
       <Dialog className="relative z-10" onClose={setCartOpen}>
@@ -90,47 +80,51 @@ export default function Cart() {
                             role="list"
                             className="-my-6 divide-y divide-gray-200"
                           >
-                            {products.map((product) => (
-                              <li key={product.id} className="flex py-6">
-                                <div className="h-24 w-24 flex-shrink-0 overflow-hidden rounded-md border border-gray-200">
-                                  <img
-                                    src={product.imageSrc}
-                                    alt={product.imageAlt}
-                                    className="h-full w-full object-cover object-center"
-                                  />
-                                </div>
-
-                                <div className="ml-4 flex flex-1 flex-col">
-                                  <div>
-                                    <div className="flex justify-between text-base font-medium text-gray-900">
-                                      <h3>
-                                        <a href={product.href}>
-                                          {product.name}
-                                        </a>
-                                      </h3>
-                                      <p className="ml-4">{product.price}</p>
+                            {carts.length > 0
+                              ? carts.map((product) => (
+                                  <li key={product.id} className="flex py-6">
+                                    <div className="h-24 w-24 flex-shrink-0 overflow-hidden rounded-md border border-gray-200">
+                                      <img
+                                        src={product.imageSrc}
+                                        alt={product.imageAlt}
+                                        className="h-full w-full object-cover object-center"
+                                      />
                                     </div>
-                                    <p className="mt-1 text-sm text-gray-500">
-                                      {product.color}
-                                    </p>
-                                  </div>
-                                  <div className="flex flex-1 items-end justify-between text-sm">
-                                    <p className="text-gray-500">
-                                      Qty {product.quantity}
-                                    </p>
 
-                                    <div className="flex">
-                                      <button
-                                        type="button"
-                                        className="font-medium text-indigo-600 hover:text-indigo-500"
-                                      >
-                                        Remove
-                                      </button>
+                                    <div className="ml-4 flex flex-1 flex-col">
+                                      <div>
+                                        <div className="flex justify-between text-base font-medium text-gray-900">
+                                          <h3>
+                                            <a href={product.href}>
+                                              {product.name}
+                                            </a>
+                                          </h3>
+                                          <p className="ml-4">
+                                            {product.price}
+                                          </p>
+                                        </div>
+                                        <p className="mt-1 text-sm text-gray-500">
+                                          {product.color}
+                                        </p>
+                                      </div>
+                                      <div className="flex flex-1 items-end justify-between text-sm">
+                                        <p className="text-gray-500">
+                                          Qty {product.quantity}
+                                        </p>
+
+                                        <div className="flex">
+                                          <button
+                                            type="button"
+                                            className="font-medium text-indigo-600 hover:text-indigo-500"
+                                          >
+                                            Remove
+                                          </button>
+                                        </div>
+                                      </div>
                                     </div>
-                                  </div>
-                                </div>
-                              </li>
-                            ))}
+                                  </li>
+                                ))
+                              : null}
                           </ul>
                         </div>
                       </div>

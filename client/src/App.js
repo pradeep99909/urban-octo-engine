@@ -8,8 +8,9 @@ import Orders from "./components/order";
 import OrderList from "./components/order.list";
 function App() {
   const [isCartOpen, setCartOpen] = useState(false);
+  const [carts, setCarts] = useState([]);
   return (
-    <AppContext.Provider value={{ isCartOpen, setCartOpen }}>
+    <AppContext.Provider value={{ isCartOpen, setCartOpen, carts, setCarts }}>
       <div className="App">
         <Header />
         <Products />
