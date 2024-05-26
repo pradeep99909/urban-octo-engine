@@ -1,6 +1,8 @@
-import React from "react";
+import React, { useContext } from "react";
+import AppContext from "../context/app.context";
 
 function Product() {
+  const { setCartOpen } = useContext(AppContext);
   return (
     <a href="#" class="group">
       <div class="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-lg bg-gray-200 xl:aspect-h-8 xl:aspect-w-7">
@@ -13,6 +15,9 @@ function Product() {
       <h3 class="mt-4 text-sm text-gray-700">Earthen Bottle</h3>
       <p class="mt-1 text-lg font-medium text-gray-900">$48</p>
       <button
+        onClick={() => {
+          setCartOpen(true);
+        }}
         type="button"
         class="inline-flex items-center rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
       >

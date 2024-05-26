@@ -1,4 +1,5 @@
-import { Fragment, useState } from "react";
+import { Fragment, useState, useContext } from "react";
+import AppContext from "../context/app.context";
 import {
   Dialog,
   DialogPanel,
@@ -36,11 +37,11 @@ const products = [
 ];
 
 export default function Cart() {
+  const { isCartOpen, setCartOpen } = useContext(AppContext);
   const [open, setOpen] = useState(true);
-
   return (
-    <Transition show={open}>
-      <Dialog className="relative z-10" onClose={setOpen}>
+    <Transition show={isCartOpen}>
+      <Dialog className="relative z-10" onClose={setCartOpen}>
         <TransitionChild
           enter="ease-in-out duration-500"
           enterFrom="opacity-0"
@@ -74,7 +75,7 @@ export default function Cart() {
                           <button
                             type="button"
                             className="relative -m-2 p-2 text-gray-400 hover:text-gray-500"
-                            onClick={() => setOpen(false)}
+                            onClick={() => setCartOpen(false)}
                           >
                             <span className="absolute -inset-0.5" />
                             <span className="sr-only">Close panel</span>
@@ -157,7 +158,7 @@ export default function Cart() {
                           <button
                             type="button"
                             className="font-medium text-indigo-600 hover:text-indigo-500"
-                            onClick={() => setOpen(false)}
+                            onClick={() => setCartOpen(false)}
                           >
                             Continue Shopping
                             <span aria-hidden="true"> &rarr;</span>
