@@ -2,7 +2,7 @@ const { default: Api } = require("./api");
 
 class Cart {
   constructor(userId) {
-    this.api = new Api("localhost:8080/api/v1");
+    this.api = new Api("http://localhost:8080/api/v1");
   }
   async getUserCart() {
     return this.api.getData("/cart");
