@@ -1,3 +1,4 @@
 module.exports = {
-    ENUM: require("./enum")
-}
+  ENUM: require("./enum"),
+  MISC: require("./misc"),
+};

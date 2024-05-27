@@ -2,7 +2,7 @@ const { response } = require("../utils");
 const services = require("../services");
 const getAllOrders = (req, res) => {
   try {
-    const data = services.orderServices.getAllOrders();
+    const data = services.orderServices.getAllOrders(req.userId);
     return response.successResponse(res, data);
   } catch (error) {
     console.error(
