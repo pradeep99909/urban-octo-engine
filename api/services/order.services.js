@@ -1,8 +1,8 @@
 const CONSTANTS = require("../constants");
 const services = require("./");
 
-const getAllOrders = () => {
-  return global.orders;
+const getAllOrders = (userId) => {
+  return global.orders[userId];
 };
 
 const getAllUserOrders = (userId) => {
