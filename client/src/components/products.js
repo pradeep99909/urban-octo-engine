@@ -22,16 +22,11 @@ function Product(props) {
         onClick={async () => {
           const api = new Network.cartNetwork.default("pradeep");
           const cart = {
-            id: 1,
-            name: "Throwback Hip Bag",
-            href: "#",
-            color: "Salmon",
-            price: "$90.00",
+            id: props.id,
+            price: props.price,
             quantity: 1,
-            imageSrc:
-              "https://tailwindui.com/img/ecommerce-images/shopping-cart-page-04-product-01.jpg",
-            imageAlt:
-              "Salmon orange fabric pouch with match zipper, gray zipper pull, and adjustable hip belt.",
+            imageSrc: props.image,
+            name: props.title,
           };
           await api.addNewCart(cart);
           const usersCart = await api.getUserCart();
@@ -54,6 +49,7 @@ const ProductList = ({ products }) => {
       {products.length > 0
         ? products.map((product) => (
             <Product
+              id={product.id}
               key={product.id}
               title={product.title}
               image={product.image}
