@@ -1,15 +1,36 @@
 const express = require("express");
 const app = express.Router();
 const controllers = require("../controllers");
+const middleware = require("../middleware");
 
-app.get("/", controllers.orderControllers.getAllOrders);
+app.get(
+  "/",
+  middleware.userMiddleware.userValidation,
+  controllers.orderControllers.getAllOrders
+);
 
-app.post("/", controllers.orderControllers.addOrder);
+app.post(
+  "/",
+  middleware.userMiddleware.userValidation,
+  controllers.orderControllers.addOrder
+);
 
-app.get("/:orderId", controllers.orderControllers.getOrder);
+app.get(
+  "/:orderId",
+  middleware.userMiddleware.userValidation,
+  controllers.orderControllers.getOrder
+);
 
-app.patch("/:orderId", controllers.orderControllers.updateOrder);
+app.patch(
+  "/:orderId",
+  middleware.userMiddleware.userValidation,
+  controllers.orderControllers.updateOrder
+);
 
-app.delete("/:orderId", controllers.orderControllers.cancelOrder);
+app.delete(
+  "/:orderId",
+  middleware.userMiddleware.userValidation,
+  controllers.orderControllers.cancelOrder
+);
 
 module.exports = app;
