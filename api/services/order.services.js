@@ -1,5 +1,5 @@
 const CONSTANTS = require("../constants");
-const services = require("./");
+const adminServices = require("./admin.services");
 
 const getAllOrders = (userId) => {
   return global.orders[userId];
@@ -40,7 +40,7 @@ const addOrder = (userId) => {
     console.log("!global.orders[userId] :: inside if");
     global.orders[userId] = {};
   }
-  order.new_coupon_code = services.adminServices.generateCouponCode(
+  order["new_coupon_code"] = adminServices.generateCouponCode(
     CONSTANTS.MISC.COUPON_CODE_LENGTH
   );
   global.orders[userId][order.id] = order;
