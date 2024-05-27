@@ -6,15 +6,37 @@ import Products from "./components/products";
 import Cart from "./components/cart";
 import Orders from "./components/order";
 import OrderList from "./components/order.list";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+
+function Main() {
+  return (
+    <>
+      <Header />
+      <Products />
+      <Cart />
+    </>
+  );
+}
+
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <Main />,
+  },
+  {
+    path: "/orders",
+    element: <OrderList />,
+  },
+]);
+
+<Cart />;
 function App() {
   const [isCartOpen, setCartOpen] = useState(false);
   const [carts, setCarts] = useState([]);
   return (
     <AppContext.Provider value={{ isCartOpen, setCartOpen, carts, setCarts }}>
       <div className="App">
-        <Header />
-        <Products />
-        <Cart />
+        <RouterProvider router={router} />
       </div>
     </AppContext.Provider>
   );
