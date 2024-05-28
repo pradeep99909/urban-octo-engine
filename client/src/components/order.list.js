@@ -4,6 +4,12 @@ import AppContext from "../context/app.context";
 
 function Order({ order }) {
   console.log("🚀 ~ Order ~ order:", order);
+  const totalPrice = order.totalPrice;
+  let afterDiscount = 0;
+  if (order.coupon_code_used) {
+    afterDiscount =
+      totalPrice - totalPrice * (order.coupon_code_used.discount / 100);
+  }
   return (
     <div class="flex flex-wrap items-center gap-y-4 py-6">
       <dl class="w-1/2 sm:w-1/4 lg:w-auto lg:flex-1">
@@ -31,7 +37,7 @@ function Order({ order }) {
           Price:
         </dt>
         <dd class="mt-1.5 text-base font-semibold text-gray-900 dark:text-white">
-          ${order.totalPrice}
+          ${afterDiscount > 0 ? afterDiscount : totalPrice}
         </dd>
       </dl>
 
