@@ -1,7 +1,16 @@
 import React from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 
-function OrderPrice() {
+function OrderPrice({ order }) {
+  console.log("🚀 ~ OrderPrice ~ order:", order);
+  const totalPrice = order.totalPrice;
+  let afterDiscount = 0;
+  let savings = 0;
+  if (order.coupon_code_used) {
+    afterDiscount =
+      totalPrice - totalPrice * (order.coupon_code_used.discount / 100);
+    savings = totalPrice - afterDiscount;
+  }
   return (
     <div className="space-y-4 bg-gray-50 p-6 dark:bg-gray-800">
       <div className="space-y-2">
@@ -10,38 +19,28 @@ function OrderPrice() {
             Original price
           </dt>
           <dd className="font-medium text-gray-900 dark:text-white">
-            $6,592.00
+            ${order.totalPrice}
           </dd>
         </dl>
 
         <dl className="flex items-center justify-between gap-4">
           <dt className="font-normal text-gray-500 dark:text-gray-400">
-            Savings
+            Savings from discount
           </dt>
-          <dd className="text-base font-medium text-green-500">-$299.00</dd>
+          <dd className="text-base font-medium text-green-500">
+            -${savings.toFixed(2)}
+          </dd>
         </dl>
 
-        <dl className="flex items-center justify-between gap-4">
-          <dt className="font-normal text-gray-500 dark:text-gray-400">
-            Store Pickup
+        <dl className="flex items-center justify-between gap-4 border-t border-gray-200 pt-2 dark:border-gray-700">
+          <dt className="text-lg font-bold text-gray-900 dark:text-white">
+            Total
           </dt>
-          <dd className="font-medium text-gray-900 dark:text-white">$99</dd>
-        </dl>
-
-        <dl className="flex items-center justify-between gap-4">
-          <dt className="font-normal text-gray-500 dark:text-gray-400">Tax</dt>
-          <dd className="font-medium text-gray-900 dark:text-white">$799</dd>
+          <dd className="text-lg font-bold text-gray-900 dark:text-white">
+            ${afterDiscount > 0 ? afterDiscount : totalPrice}
+          </dd>
         </dl>
       </div>
-
-      <dl className="flex items-center justify-between gap-4 border-t border-gray-200 pt-2 dark:border-gray-700">
-        <dt className="text-lg font-bold text-gray-900 dark:text-white">
-          Total
-        </dt>
-        <dd className="text-lg font-bold text-gray-900 dark:text-white">
-          $7,191.00
-        </dd>
-      </dl>
     </div>
   );
 }
@@ -110,7 +109,7 @@ export default function Orders() {
             {location.state.orders.map((product) => (
               <Product product={product} />
             ))}
-            <OrderPrice />
+            <OrderPrice order={location.state} />
           </div>
 
           <div className="mt-6 grow sm:mt-8 lg:mt-0">
