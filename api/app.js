@@ -122,6 +122,8 @@ const declareGlobal = () => {
     },
   ];
   global.products = products;
+
+  global.coupons = [];
 };
 
 module.exports = {
