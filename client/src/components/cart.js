@@ -159,8 +159,9 @@ function Cart() {
                               const orderApi =
                                 new Network.ordersNetwork.default();
                               console.log("🚀 ~ onClick={ ~ coupon:", coupon);
+                              let verify = { code: "" };
                               if (coupon) {
-                                const verify = await orderApi.verifyCoupon({
+                                verify = await orderApi.verifyCoupon({
                                   couponCode: coupon,
                                 });
                                 console.log("🚀 ~ onClick={ ~ verify:", verify);
@@ -168,7 +169,9 @@ function Cart() {
                                   alert(verify.message);
                                 }
                               }
-                              const order = await orderApi.addNewOrder();
+                              const order = await orderApi.addNewOrder({
+                                couponCode: verify.code,
+                              });
 
                               navigate("/order", {
                                 state: order,

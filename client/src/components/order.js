@@ -119,10 +119,11 @@ export default function Orders() {
                 Congratulations you have got a coupon code gift from this order
               </h3>
               <p className="text-lg font-bold text-gray-900 dark:text-white">
-                {location.state.new_coupon_code}
+                {location.state.new_coupon_code.code}
               </p>
               <p className="text-gray-900 dark:text-white">
-                You can use for your next order to claim % discount
+                You can use for your next order to claim{" "}
+                {location.state.new_coupon_code.discount}% discount
               </p>
               <button
                 className="flex items-center justify-center rounded-md border border-transparent bg-indigo-600 px-6 py-3 text-base font-medium text-white shadow-sm hover:bg-indigo-700"

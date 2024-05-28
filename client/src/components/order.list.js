@@ -31,7 +31,7 @@ function Order({ order }) {
           Price:
         </dt>
         <dd class="mt-1.5 text-base font-semibold text-gray-900 dark:text-white">
-          $100
+          ${order.totalPrice}
         </dd>
       </dl>
 
@@ -40,7 +40,7 @@ function Order({ order }) {
           Gift:
         </dt>
         <dd class="mt-1.5 text-base font-semibold text-gray-900 dark:text-white">
-          {order.new_coupon_code}
+          {order.new_coupon_code.code}
         </dd>
       </dl>
 
