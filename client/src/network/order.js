@@ -1,6 +1,6 @@
 const { default: Api } = require("./api");
 
-class Cart {
+class Order {
   constructor(userId) {
     this.api = new Api("http://localhost:8080/api/v1/order");
   }
@@ -24,4 +24,4 @@ class Cart {
   }
 }
 
-export default Cart;
+export default Order;
