@@ -28,8 +28,8 @@ const getOrder = (req, res) => {
 const addOrder = (req, res) => {
   try {
     const userId = req.userId;
-    const orders = req.body.orders;
-    const data = services.orderServices.addOrder(userId, orders);
+    const couponCode = req.body.couponCode || "";
+    const data = services.orderServices.addOrder(userId, couponCode);
     return response.resourceCreated(res, data);
   } catch (error) {
     console.error("file :: order.controllers.js :: addOrder :: error", error);

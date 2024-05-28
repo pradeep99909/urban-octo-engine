@@ -23,7 +23,7 @@ const getOrder = (userId, orderId) => {
   return global.orders[userId][orderId];
 };
 
-const addOrder = (userId) => {
+const addOrder = (userId, couponCode) => {
   if (!global.carts[userId]) {
     const error = new Error();
     error.message = "Add some Items in Cart!";
@@ -32,9 +32,17 @@ const addOrder = (userId) => {
   const order = {
     id: Date.now(),
   };
+  if (couponCode) {
+    const couponIndex = global.coupons.findIndex(
+      (coupon) => coupon.code == couponCode
+    );
+    global.coupons[couponIndex].isUsed = true;
+    order["coupon_code_used"] = global.coupons[couponIndex];
+  }
   order.orders = global.carts[userId];
   delete global.carts[userId];
   order.state = CONSTANTS.ENUM.ORDER_STATES.CONFIRMED;
+  order.totalPrice = order.orders.reduce((acc, val) => acc + val.price, 0);
   console.log("!global.orders[userId] ::", !global.orders[userId]);
   if (!global.orders[userId]) {
     console.log("!global.orders[userId] :: inside if");
