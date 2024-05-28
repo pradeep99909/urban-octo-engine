@@ -1,6 +1,7 @@
 import React, { useContext, useEffect } from "react";
 import Network from "../network";
 import AppContext from "../context/app.context";
+import { useNavigate } from "react-router-dom";
 
 function Order({ order }) {
   console.log("🚀 ~ Order ~ order:", order);
@@ -95,6 +96,7 @@ function Order({ order }) {
 }
 
 export default function OrderList() {
+  const navigate = useNavigate();
   const { orders, setOrders } = useContext(AppContext);
   useEffect(() => {
     const fetchOrders = async () => {
@@ -119,6 +121,12 @@ export default function OrderList() {
             <h2 class="text-xl font-semibold text-gray-900 dark:text-white sm:text-2xl">
               My orders
             </h2>
+            <button
+              className="flex items-center justify-center rounded-md border border-transparent bg-indigo-600 px-6 py-3 text-base font-medium text-white shadow-sm hover:bg-indigo-700"
+              onClick={() => navigate("/")}
+            >
+              Main Menu
+            </button>
           </div>
 
           <div class="mt-6 flow-root sm:mt-8">
