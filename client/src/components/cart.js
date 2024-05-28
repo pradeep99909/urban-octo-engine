@@ -167,6 +167,7 @@ function Cart() {
                                 console.log("🚀 ~ onClick={ ~ verify:", verify);
                                 if (!verify.code) {
                                   alert(verify.message);
+                                  return;
                                 }
                               }
                               const order = await orderApi.addNewOrder({
