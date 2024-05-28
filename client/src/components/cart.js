@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import AppContext from "../context/app.context";
 import {
   Dialog,
@@ -23,6 +23,7 @@ async function removeItemFromCart(setCarts, setCartOpen, cartId) {
 }
 
 function Cart() {
+  const [coupon, setCoupon] = useState("");
   const { isCartOpen, setCartOpen, carts, setCarts } = useContext(AppContext);
   const navigate = useNavigate();
   return (
@@ -142,16 +143,39 @@ function Cart() {
                         Shipping and taxes calculated at checkout.
                       </p>
                       <div className="mt-6">
+                        <input
+                          type="text"
+                          name="price"
+                          id="price"
+                          className="block w-full rounded-md border-0 py-1.5 pl-7 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                          placeholder="Enter Coupon code"
+                          onChange={(e) => {
+                            setCoupon(e.target.value);
+                          }}
+                        />
                         <button
                           onClick={async () => {
-                            const orderApi =
-                              new Network.ordersNetwork.default();
-                            const order = await orderApi.addNewOrder();
-                            navigate("/order", {
-                              state: order,
-                            });
-                            setCartOpen(false);
-                            setCarts([]);
+                            try {
+                              const orderApi =
+                                new Network.ordersNetwork.default();
+                              console.log("🚀 ~ onClick={ ~ coupon:", coupon);
+                              if (coupon) {
+                                const verify = await orderApi.verifyCoupon(
+                                  coupon
+                                );
+                                console.log("🚀 ~ onClick={ ~ verify:", verify);
+                                if (!verify.code) {
+                                  alert(verify);
+                                }
+                              }
+                              const order = await orderApi.addNewOrder();
+
+                              navigate("/order", {
+                                state: order,
+                              });
+                              setCartOpen(false);
+                              setCarts([]);
+                            } catch (error) {}
                           }}
                           className="flex items-center justify-center rounded-md border border-transparent bg-indigo-600 px-6 py-3 text-base font-medium text-white shadow-sm hover:bg-indigo-700"
                         >
