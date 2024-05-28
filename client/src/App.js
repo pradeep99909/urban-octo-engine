@@ -7,7 +7,6 @@ import Cart from "./components/cart";
 import Orders from "./components/order";
 import OrderList from "./components/order.list";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import { history } from "./router";
 
 function Main() {
   return (
@@ -26,7 +25,11 @@ const router = createBrowserRouter([
   },
   {
     path: "/orders",
-    element: <Orders />,
+    element: <OrderList />,
+  },
+  {
+    path: "order",
+    element: <Order />,
   },
 ]);
 
