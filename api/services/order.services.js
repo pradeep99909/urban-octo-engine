@@ -40,9 +40,12 @@ const addOrder = (userId) => {
     console.log("!global.orders[userId] :: inside if");
     global.orders[userId] = {};
   }
-  order["new_coupon_code"] = adminServices.generateCouponCode(
-    CONSTANTS.MISC.COUPON_CODE_LENGTH
-  );
+  order["new_coupon_code"] = {
+    code: adminServices.generateCouponCode(CONSTANTS.MISC.COUPON_CODE_LENGTH),
+    expireAt: Date.now() + CONSTANTS.MISC.COUPON_EXPIRE_TIME,
+    discount: CONSTANTS.MISC.COUPON_DISCOUNT,
+  };
+  global.coupons.push(order.new_coupon_code);
   global.orders[userId][order.id] = order;
   return global.orders[userId][order.id];
 };
