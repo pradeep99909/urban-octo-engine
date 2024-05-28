@@ -1,7 +1,6 @@
 import { useContext } from "react";
 import { withRouter } from "react-router-dom";
 import AppContext from "../context/app.context";
-import { history } from "../router";
 import {
   Dialog,
   DialogPanel,
