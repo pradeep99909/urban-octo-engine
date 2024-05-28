@@ -160,12 +160,12 @@ function Cart() {
                                 new Network.ordersNetwork.default();
                               console.log("🚀 ~ onClick={ ~ coupon:", coupon);
                               if (coupon) {
-                                const verify = await orderApi.verifyCoupon(
-                                  coupon
-                                );
+                                const verify = await orderApi.verifyCoupon({
+                                  couponCode: coupon,
+                                });
                                 console.log("🚀 ~ onClick={ ~ verify:", verify);
                                 if (!verify.code) {
-                                  alert(verify);
+                                  alert(verify.message);
                                 }
                               }
                               const order = await orderApi.addNewOrder();
