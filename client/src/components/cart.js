@@ -147,8 +147,12 @@ function Cart() {
                           onClick={async () => {
                             const orderApi =
                               new Network.ordersNetwork.default();
-                            await orderApi.addNewOrder();
-                            navigate("/orders");
+                            const order = await orderApi.addNewOrder();
+                            navigate("/order", {
+                              state: order,
+                            });
+                            setCartOpen(false);
+                            setCarts([]);
                           }}
                           className="flex items-center justify-center rounded-md border border-transparent bg-indigo-600 px-6 py-3 text-base font-medium text-white shadow-sm hover:bg-indigo-700"
                         >
