@@ -1,0 +1,13 @@
+{
+  "name": "urban-octo-engine",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "server": "cd api && npm install && node index.js",
+    "client": "cd client && npm install && npm start"
+  },
+  "author": "",
+  "license": "ISC"
+}
