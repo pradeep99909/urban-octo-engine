@@ -7,8 +7,8 @@ class Order {
   async getUserOrder() {
     return this.api.getData("/");
   }
-  async addNewOrder() {
-    return this.api.postData("/");
+  async addNewOrder(body) {
+    return this.api.postData("/", body);
   }
   async getOrder(orderId) {
     return this.api.getData("/" + orderId);
