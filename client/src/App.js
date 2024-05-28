@@ -7,6 +7,7 @@ import Cart from "./components/cart";
 import Orders from "./components/order";
 import OrderList from "./components/order.list";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { history } from "./router";
 
 function Main() {
   return (
@@ -25,7 +26,7 @@ const router = createBrowserRouter([
   },
   {
     path: "/orders",
-    element: <OrderList />,
+    element: <Orders />,
   },
 ]);
 
@@ -39,7 +40,7 @@ function App() {
       value={{ isCartOpen, setCartOpen, carts, setCarts, orders, setOrders }}
     >
       <div className="App">
-        <RouterProvider router={router} />
+        <RouterProvider router={router} history={history.default} />
       </div>
     </AppContext.Provider>
   );

@@ -1,6 +1,7 @@
 import { useContext } from "react";
 import { withRouter } from "react-router-dom";
 import AppContext from "../context/app.context";
+import { history } from "../router";
 import {
   Dialog,
   DialogPanel,
@@ -10,7 +11,7 @@ import {
 } from "@headlessui/react";
 
 import Network from "../network";
-//import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 async function removeItemFromCart(setCarts, setCartOpen, cartId) {
   const cartApi = new Network.cartNetwork.default("pradeep");
@@ -25,7 +26,7 @@ async function removeItemFromCart(setCarts, setCartOpen, cartId) {
 
 function Cart() {
   const { isCartOpen, setCartOpen, carts, setCarts } = useContext(AppContext);
-  //const history = useHistory();
+  const navigate = useNavigate();
   return (
     <Transition show={isCartOpen}>
       <Dialog className="relative z-10" onClose={setCartOpen}>
@@ -148,7 +149,7 @@ function Cart() {
                             const orderApi =
                               new Network.ordersNetwork.default();
                             await orderApi.addNewOrder();
-                            //await history.push("/orders");
+                            navigate("/orders");
                           }}
                           className="flex items-center justify-center rounded-md border border-transparent bg-indigo-600 px-6 py-3 text-base font-medium text-white shadow-sm hover:bg-indigo-700"
                         >
