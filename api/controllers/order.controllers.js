@@ -68,10 +68,27 @@ const cancelOrder = (req, res) => {
   }
 };
 
+const verifyCouponCode = (req, res) => {
+  try {
+    const couponCode = req.body.couponCode;
+    if (!couponCode)
+      return response.parametersMissing(res, "Parameters Missing");
+    const data = services.orderServices.verifyCouponCode(couponCode);
+    return response.successResponse(res, data);
+  } catch (error) {
+    console.error(
+      "file :: order.controllers.js :: verifyCouponCode :: error",
+      error
+    );
+    return response.errorResponse(res, error);
+  }
+};
+
 module.exports = {
   getAllOrders,
   getOrder,
   addOrder,
   updateOrder,
   cancelOrder,
+  verifyCouponCode,
 };

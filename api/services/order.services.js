@@ -44,6 +44,7 @@ const addOrder = (userId) => {
     code: adminServices.generateCouponCode(CONSTANTS.MISC.COUPON_CODE_LENGTH),
     expireAt: Date.now() + CONSTANTS.MISC.COUPON_EXPIRE_TIME,
     discount: CONSTANTS.MISC.COUPON_DISCOUNT,
+    isUsed: false,
   };
   global.coupons.push(order.new_coupon_code);
   global.orders[userId][order.id] = order;
@@ -71,6 +72,28 @@ const cancelOrder = (userId, orderId) => {
   return deletedOrder;
 };
 
+const verifyCouponCode = (couponCode) => {
+  const couponIndex = global.coupons.findIndex(
+    (coupon) => coupon.code == couponCode
+  );
+  if (couponIndex < 0) {
+    const error = new Error();
+    error.message = "Wrong Coupon Code";
+    throw error;
+  }
+  if (global.coupons[couponIndex].expireAt < Date.now()) {
+    const error = new Error();
+    error.message = "Coupon COde Expired!";
+    throw error;
+  }
+  if (global.coupons[couponIndex].isUsed) {
+    const error = new Error();
+    error.message = "Coupon Already Used!";
+    throw error;
+  }
+  return global.coupons[couponIndex];
+};
+
 module.exports = {
   getAllOrders,
   getAllUserOrders,
@@ -78,4 +101,5 @@ module.exports = {
   addOrder,
   updateOrder,
   cancelOrder,
+  verifyCouponCode,
 };

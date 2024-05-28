@@ -33,4 +33,10 @@ app.delete(
   controllers.orderControllers.cancelOrder
 );
 
+app.post(
+  "/verify",
+  middleware.userMiddleware.userValidation,
+  controllers.orderControllers.verifyCouponCode
+);
+
 module.exports = app;
