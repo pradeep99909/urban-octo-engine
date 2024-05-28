@@ -1,4 +1,5 @@
 import { useContext } from "react";
+import { withRouter } from "react-router-dom";
 import AppContext from "../context/app.context";
 import {
   Dialog,
@@ -9,6 +10,7 @@ import {
 } from "@headlessui/react";
 
 import Network from "../network";
+//import { useHistory } from "react-router-dom";
 
 async function removeItemFromCart(setCarts, setCartOpen, cartId) {
   const cartApi = new Network.cartNetwork.default("pradeep");
@@ -21,9 +23,9 @@ async function removeItemFromCart(setCarts, setCartOpen, cartId) {
   setCarts(userCarts);
 }
 
-export default function Cart() {
+function Cart() {
   const { isCartOpen, setCartOpen, carts, setCarts } = useContext(AppContext);
-
+  //const history = useHistory();
   return (
     <Transition show={isCartOpen}>
       <Dialog className="relative z-10" onClose={setCartOpen}>
@@ -141,12 +143,17 @@ export default function Cart() {
                         Shipping and taxes calculated at checkout.
                       </p>
                       <div className="mt-6">
-                        <a
-                          href="#"
+                        <button
+                          onClick={async () => {
+                            const orderApi =
+                              new Network.ordersNetwork.default();
+                            await orderApi.addNewOrder();
+                            //await history.push("/orders");
+                          }}
                           className="flex items-center justify-center rounded-md border border-transparent bg-indigo-600 px-6 py-3 text-base font-medium text-white shadow-sm hover:bg-indigo-700"
                         >
                           Checkout
-                        </a>
+                        </button>
                       </div>
                       <div className="mt-6 flex justify-center text-center text-sm text-gray-500">
                         <p>
@@ -172,3 +179,5 @@ export default function Cart() {
     </Transition>
   );
 }
+
+export default Cart;

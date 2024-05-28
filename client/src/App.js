@@ -33,8 +33,11 @@ const router = createBrowserRouter([
 function App() {
   const [isCartOpen, setCartOpen] = useState(false);
   const [carts, setCarts] = useState([]);
+  const [orders, setOrders] = useState([]);
   return (
-    <AppContext.Provider value={{ isCartOpen, setCartOpen, carts, setCarts }}>
+    <AppContext.Provider
+      value={{ isCartOpen, setCartOpen, carts, setCarts, orders, setOrders }}
+    >
       <div className="App">
         <RouterProvider router={router} />
       </div>
