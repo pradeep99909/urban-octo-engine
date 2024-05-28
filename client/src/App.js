@@ -29,7 +29,7 @@ const router = createBrowserRouter([
   },
   {
     path: "order",
-    element: <Order />,
+    element: <Orders />,
   },
 ]);
 
@@ -43,7 +43,7 @@ function App() {
       value={{ isCartOpen, setCartOpen, carts, setCarts, orders, setOrders }}
     >
       <div className="App">
-        <RouterProvider router={router} history={history.default} />
+        <RouterProvider router={router} />
       </div>
     </AppContext.Provider>
   );
