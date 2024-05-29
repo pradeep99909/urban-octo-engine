@@ -11,9 +11,13 @@ function Product(props) {
         <img
           src={props.image}
           alt={props.title}
-          width={"250px"}
-          height={"100px"}
-          className="h-full w-full object-cover object-center group-hover:opacity-75"
+          style={{
+            width: "250px",
+            height: "200px",
+            bakgroundSize: "content",
+            objectFit: "contain",
+          }}
+          className="object-cover object-center group-hover:opacity-75"
         />
       </div>
       <h3 className="mt-4 text-sm text-gray-700">{props.title}</h3>
