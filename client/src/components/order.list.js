@@ -137,7 +137,7 @@ export default function OrderList() {
                   return <Order key={order.id} order={order} />;
                 })
               ) : (
-                <p>No Orders found!</p>
+                <p className="bg-white">No Orders found!</p>
               )}
             </div>
           </div>
