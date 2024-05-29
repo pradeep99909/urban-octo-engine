@@ -29,9 +29,8 @@ const addOrder = (userId, couponCode) => {
     error.message = "Add some Items in Cart!";
     return error;
   }
-  const order = {
-    id: Date.now(),
-  };
+  const productId = Date.now();
+  const order = {};
   if (couponCode) {
     const couponIndex = global.coupons.findIndex(
       (coupon) => coupon.code == couponCode
@@ -55,8 +54,8 @@ const addOrder = (userId, couponCode) => {
     isUsed: false,
   };
   global.coupons.push(order.new_coupon_code);
-  global.orders[userId][order.id] = order;
-  return global.orders[userId][order.id];
+  global.orders[userId][productId] = order;
+  return global.orders[userId][productId];
 };
 
 const updateOrder = (userId, orderId, orders) => {

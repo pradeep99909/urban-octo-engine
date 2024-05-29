@@ -47,11 +47,6 @@ function OrderPrice({ order }) {
 
 function Product({ product }) {
   console.log("🚀 ~ Product ~ product:", product);
-  // id: 1716917431220;
-  // imageSrc: "https://cdn.dummyjson.com/products/images/smartphones/iPhone%205s/1.png";
-  // name: "iPhone 5s";
-  // price: 199.99;
-  // quantity: 1;
   return (
     <div className="space-y-4 p-6">
       <div className="flex items-center gap-6">
@@ -77,7 +72,7 @@ function Product({ product }) {
           <span className="font-medium text-gray-900 dark:text-white">
             Product ID:
           </span>{" "}
-          BJ8364850
+          {product.id}
         </p>
 
         <div className="flex items-center justify-end gap-4">

@@ -9,7 +9,6 @@ const getUserCart = (userId) => {
 
 const addToUserCart = (userId, cartData) => {
   console.log("🚀 ~ addToUserCart ~ userId, cartData:", userId, cartData);
-  cartData.id = Date.now();
   if (!global.carts[userId]) {
     global.carts[userId] = [];
   }
