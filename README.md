@@ -14,19 +14,20 @@ A project designed to manage and process order data efficiently.
 
    ```bash
    git clone https://github.com/pradeep99909/urban-octo-engine.git
-   cd urban-octo-engine
 
    ```
 
-2. Run Server
+2. Run Server on new terminal
 
 ```bash
+cd urban-octo-engine
 npm run server
 ```
 
-3. Run Client
+3. Run Client on new terminal
 
 ```bash
+cd urban-octo-engine
 npm run client
 ```
 
@@ -34,4 +35,11 @@ npm run client
 
 ```
 http://localhost:8080/api/v1/admin/data
+```
+
+## for unit test
+
+```bash
+cd urban-octo-engine
+npm test
 ```
