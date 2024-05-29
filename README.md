@@ -18,11 +18,19 @@ A project designed to manage and process order data efficiently.
 
    ```
 
-2. npm run server
+2. Run Server
 
-3. npm run client
+```bash
+npm run server
+```
 
-##for Admin API
+3. Run Client
+
+```bash
+npm run client
+```
+
+## for Admin API
 
 ```
 http://localhost:8080/api/v1/admin/data
