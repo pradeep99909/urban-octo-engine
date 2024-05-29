@@ -30,7 +30,9 @@ const addOrder = (userId, couponCode) => {
     return error;
   }
   const productId = Date.now();
-  const order = {};
+  const order = {
+    id: productId,
+  };
   if (couponCode) {
     const couponIndex = global.coupons.findIndex(
       (coupon) => coupon.code == couponCode
